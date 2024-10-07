@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Albert Kušlevič" />
+    <meta
+      name="description"
+      content="Page dedicated to an upcoming 20th Year Anniversary Bioinformatics convention in Vilnius"
+    />
+    <title>Sign up page</title>
+    <link rel="stylesheet" href="main.css" type="text/css" />
+    <link rel="icon" href="images/bioinformatics.png" type="image/x-icon" />
+  </head>
+
+  <body>
+    <h1 style="text-align: center">
+      Welcome to the sign up page for the Bioinformatics convention in Vilnius
+    </h1>
+    <hr />
+    <h3>Please make sure to correctly fill in the information</h3>
+    <form action="https://httpbin.org/get" method="get">
+      <fieldset>
+        <legend>Personal Info</legend>
+        <p>
+          <label for="firstName">First Name:</label>
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            placeholder="Skylar"
+            autocomplete="on"
+            required
+            autofocus
+          />
+        </p>
+        <p>
+          <label for="lastName">Last Name:</label>
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            placeholder="White"
+            autocomplete="on"
+            required
+          />
+        </p>
+        <p>
+          <label for="phone">Phone:</label>
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            placeholder="370-67-323-332"
+            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{3}"
+            required
+          />
+        </p>
+        <p>
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="skylar.white@gmail.com"
+            autocomplete="on"
+            required
+          />
+        </p>
+
+        <p>
+          <label for="research">Research area:</label>
+          <select name="research" id="research" multiple size="6">
+            <optgroup label="Molecular Data">
+              <option value="genomics">Genomics</option>
+              <option value="proteomics">Proteomics</option>
+            </optgroup>
+            <optgroup label="Computational Approaches">
+              <option value="systems biology">Systems Biology</option>
+              <option value="bioinformatics" selected>Bioinformatics</option>
+            </optgroup>
+          </select>
+        </p>
+      </fieldset>
+      <br />
+      <fieldset>
+        <legend>Event details</legend>
+        <p>
+          <label> Days Attending: </label><br /><br />
+          <input type="checkbox" id="day1" name="day1" />
+          <label for="day1">Day 1</label><br /><br />
+          <input type="checkbox" id="day2" name="day2" />
+          <label for="day2">Day 2</label><br /><br />
+          <input type="checkbox" id="day3" name="day3" />
+          <label for="day3">Day 3</label>
+        </p>
+        <p>
+          <label>Preffered Session Type:</label><br /><br />
+          <input type="radio" id="workshop" name="session" value="workshop" />
+          <label for="workshop">Workshop</label><br /><br />
+          <input
+            type="radio"
+            id="presentation"
+            name="session"
+            value="presentation"
+          />
+          <label for="presentation">Presentation</label>
+        </p>
+      </fieldset>
+      <br />
+      <fieldset>
+        <legend>Make sure to leave a comment</legend>
+        <label for="message">Your message:</label><br />
+        <textarea
+          name="message"
+          id="message"
+          cols="30"
+          rows="10"
+          placeholder="Leave your message here..."
+        ></textarea>
+      </fieldset>
+      <br />
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </form>
+    <hr />
+    <p>
+      Click <em><a href="index.html">here</a></em> in order to be redirected
+      back the main page.
+    </p>
+    <hr />
+    <p>
+      <a href="#">Back to top</a>
+    </p>
+  </body>
+</html>
