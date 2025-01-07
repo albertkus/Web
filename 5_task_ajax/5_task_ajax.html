@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Albert Kuslevic" />
+    <title>File Loading Test Using AJAX</title>
+  </head>
+  <body>
+    <h1>AJAX</h1>
+    <input type="text" id="fileName" placeholder="Enter file name" />
+    <button id="loadButton">Load</button>
+    <div id="content"></div>
+    <script>
+      "use strict";
+
+      document
+        .getElementById("loadButton")
+        .addEventListener("click", checkFiles);
+      document
+        .getElementById("fileName")
+        .addEventListener("input", function () {
+          this.style.backgroundColor = "";
+        });
+
+      async function checkFiles() {
+        const inputField = document.getElementById("fileName");
+        const fileName = inputField.value.trim();
+        const contentDiv = document.getElementById("content");
+
+        if (!fileName) {
+          inputField.style.backgroundColor = "red";
+          return;
+        }
+
+        contentDiv.innerHTML = "";
+
+        const htmlPath = fileName + ".html";
+        const txtPath = fileName + ".txt";
+
+        const fetchHtml = fetch(htmlPath)
+          .then((r) => (r.ok ? r.text() : Promise.reject()))
+          .catch(() => null);
+        const fetchTxt = fetch(txtPath)
+          .then((r) => (r.ok ? r.text() : Promise.reject()))
+          .catch(() => null);
+
+        let [htmlContent, txtContent] = await Promise.all([
+          fetchHtml,
+          fetchTxt,
+        ]);
+
+        if (htmlContent !== null) {
+          contentDiv.innerHTML = htmlContent;
+        } else if (txtContent !== null) {
+          contentDiv.innerHTML = txtContent;
+        } else {
+          inputField.style.backgroundColor = "red";
+        }
+      }
+    </script>
+  </body>
+</html>
