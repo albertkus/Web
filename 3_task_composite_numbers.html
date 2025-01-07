@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Albert Kušlevič" />
+    <meta
+      name="description"
+      content="Page dedicated to displaying a list of composite numbers."
+    />
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      var num_limit = 100;
+      var num = 4;
+      var composite_numbers = [];
+
+      while (num <= num_limit) {
+        var isPrime = true;
+
+        for (var factor = 2; factor < num; factor++) {
+          if (num % factor === 0) {
+            isPrime = false;
+            break;
+          }
+        }
+        if (!isPrime) {
+          composite_numbers.push(num);
+        }
+
+        num++;
+      }
+
+      alert(composite_numbers.join(", "));
+    </script>
+  </body>
+</html>
