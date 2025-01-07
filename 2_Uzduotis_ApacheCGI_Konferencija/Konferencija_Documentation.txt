@@ -1,0 +1,22 @@
+Documentation on how to fill properly the form on signing up for the Bioinformatics conference via Curl
+
+Required fields:
+firstName - Your first name;
+lastName - Your last name;
+phone - Your phone number; Phone number must follow the 123-12-123-123 format in other case you will receive an error;
+email - Your personal email; It must follow the youremail@mail.com format in other case you will receive an error;
+day1, day2, day3 - Here you must pick days you will be attending the event. If typing in curl you must write day1=Day 1, day2=Day 2, day3=Day 3 accordingly
+session - Here you choose session type from: Workshop or Presentation
+
+Optional fields:
+message - Here you can leave a personal comment;
+research - Here you pick from what research field you are most interested in. You can pick from: Genomics, Proteomics, Systems Biology, Bioinformatics;
+
+Here is an example where a person named Jesse Pinkman filled in his 123-12-123-123 phone number and jesse@gmail.com mail, picked 1st Day to attend, chose a Workshop session and left a Hello world message via Curl
+curl http://localhost/cgi-bin/submit.pl -d "firstName=Jesse&lastName=Pinkman&phone=123-12-123-123&email=jesse%40gmail.com&research=Genomics&research=Proteomics&day1=Day 1&session=Workshop&message=Hello world"
+
+Here we can see that the person did not follow the proper email and phone format, also forgot to pick a day to attend and pick a session
+curl http://localhost/cgi-bin/submit.pl -d "firstName=Jesse&lastName=Pinkman&phone=12312-123-123&email=jessegmail.com"
+
+
+
