@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Albert Kuslevic" />
+    <meta name="description" content="A tool for organizing file trees" />
+    <title>File Tree Creator</title>
+    <style>
+      body {
+        font-family: Verdana, Geneva, sans-serif;
+        margin: 30px;
+        background: #f9f9f9;
+      }
+      .tree-section {
+        padding: 15px;
+        background: #fff;
+        margin: 15px 0;
+        border: 1px solid #ddd;
+      }
+      .tree-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+      }
+      .tree-controls label {
+        font-weight: bold;
+      }
+      .tree-children {
+        margin-top: 10px;
+      }
+      .file-container div,
+      .subdir-container .tree-section {
+        margin-top: 8px;
+      }
+      button {
+        cursor: pointer;
+        padding: 5px 10px;
+        font-size: 0.9em;
+      }
+      input[type="text"] {
+        padding: 3px;
+        border: 1px solid #ccc;
+      }
+      input[type="file"] {
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="treeForm">
+      <div class="tree-section" data-level="0">
+        <div class="tree-controls">
+          <label>
+            Directory:
+            <input
+              type="text"
+              name="directories[]"
+              placeholder="Enter directory name"
+              required
+            />
+          </label>
+          <button type="button" class="add-subdir">Add Subdirectory</button>
+          <button type="button" class="add-file">Add File</button>
+        </div>
+        <div class="tree-children">
+          <div class="file-container"></div>
+          <div class="subdir-container"></div>
+        </div>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      "use strict";
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector("#treeForm").addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert("Tree submitted successfully!");
+        });
+
+        document.querySelector("#treeForm").addEventListener("click", (e) => {
+          if (e.target.classList.contains("add-subdir")) {
+            addSubdirectory(e.target);
+          } else if (e.target.classList.contains("add-file")) {
+            addFile(e.target);
+          }
+        });
+      });
+
+      function addSubdirectory(button) {
+        const subdirContainer = button
+          .closest(".tree-section")
+          .querySelector(".subdir-container");
+        const subdirLevel =
+          parseInt(button.closest(".tree-section").dataset.level, 10) + 1;
+        const subdirIndex = subdirContainer.children.length;
+
+        const parentName = button
+          .closest(".tree-section")
+          .querySelector('input[type="text"]').name;
+
+        const newSubdir = document.createElement("div");
+        newSubdir.classList.add("tree-section");
+        newSubdir.dataset.level = subdirLevel;
+
+        newSubdir.innerHTML = `
+          <div class="tree-controls">
+              <label>
+                  Directory: <input type="text" name="${parentName}[subdirectory][${subdirIndex}][name]" placeholder="Enter directory name" required>
+              </label>
+              <button type="button" class="add-subdir">Add Subdirectory</button>
+              <button type="button" class="add-file">Add File</button>
+          </div>
+          <div class="tree-children">
+              <div class="file-container"></div>
+              <div class="subdir-container"></div>
+          </div>
+        `;
+
+        subdirContainer.appendChild(newSubdir);
+      }
+
+      function addFile(button) {
+        const fileContainer = button
+          .closest(".tree-section")
+          .querySelector(".file-container");
+        const fileIndex = fileContainer.children.length;
+        const parentName = button
+          .closest(".tree-section")
+          .querySelector('input[type="text"]').name;
+
+        const newFile = document.createElement("div");
+        newFile.innerHTML = `
+          <label>
+              File: <input type="file" name="${parentName}[files][${fileIndex}">
+          </label>
+        `;
+
+        fileContainer.appendChild(newFile);
+      }
+    </script>
+  </body>
+</html>
